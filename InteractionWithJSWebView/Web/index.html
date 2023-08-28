@@ -8,24 +8,30 @@
             #sendButton {
               background-color: yellow;
             }
-    </style>
+            label {
+              margin-right: 10px; /* 调整你想要的空间大小 */
+            }
+            </style>
     </head>
     <body>
-        訊息：<span id="name"></span>
         <br/>
-        <button id="sendButton" onclick="responseSwift()">SendMsg</button>
+        從app收到的訊息：<span id="name"></span>
+        <br/><br/>
+        <label for="textInput">Enter your text to App:</label>
+        <input type="text" id="textInput" name="textInput">
+        <br/>
+        <button id="sendButton" onclick="responseSwift()">SendMsgToApp</button>
+        <br/><br/>
         <script type="text/javascript">
             function sendMessage(message) {
                 document.getElementById("name").innerHTML = message
                 console.log(message);
                 return "Got it"
             }
-        
         function responseSwift() {
-            window.webkit.messageHandlers.ToApp.postMessage("送訊息到手機")
+            var textInputValue = document.getElementById("textInput").value;
+            window.webkit.messageHandlers.ToApp.postMessage(textInputValue);
         }
         </script>
     </body>
 </html>
-
-
